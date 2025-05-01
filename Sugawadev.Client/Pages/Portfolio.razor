@@ -1,5 +1,5 @@
 ﻿@page "/portfolio"
-@rendermode InteractiveWebAssembly
+@* @rendermode InteractiveWebAssembly *@
 
 <PageTitle>Portfolio</PageTitle>
 
@@ -33,20 +33,6 @@
     </div>
 </div>
 
-<p>たくさん書くことが多すぎて準備が間に合っていません.</p>
-
-<p role="status">暇つぶしカウンター: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">クリック</button>
-
-<p>これちゃんとWASMで動いてる？</p>
-
 @code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
 }
 
