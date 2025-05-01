@@ -5,96 +5,100 @@
 
 <h1>ポートフォリオ</h1>
 <div class="sakuhin">
-    <h2>過去に作ってきたものたち</h2>
+	<h2>過去に作ってきたものたち</h2>
 
-    @foreach (var item in portfolioItems)
-    {
-        <div class="modal fade" id="@item.Id" tabindex="-1" aria-labelledby="@item.Label" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="@item.Label">@item.Title</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>@item.Description</p>
-                        @if (item.XPath != null)
-                        {
-                            <a href="@item.XPath" target="_blank" rel="noreferrer">
-                                <img src="./pub/logos/x.svg" alt="X" width="20" height="20" />
-                            </a>
-                        }
-                        @if (item.GithubPath != null)
-                        {
-                            <a href="@item.GithubPath" target="_blank" rel="noreferrer">
-                                <img src="./pub/logos/github.svg" alt="X" width="20" height="20" />
-                            </a>
-                        }
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-                        @if (item.DetailPath != null)
-                        {
-                            <a class="btn btn-primary" href="@item.DetailPath" role="button" target="_blank" rel="noreferrer">詳しく見る</a>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
+	@foreach (var item in portfolioItems)
+	{
+		<div class="modal fade" id="@item.Id" tabindex="-1" aria-labelledby="@item.Label" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="@item.Label">@item.Title</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<img src="@item.ImagePath" class="modal-img d-block mx-auto" alt="@item.Title">
+						@((MarkupString)item.Description)
 
-        <div class="card" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#@item.Id">
-            <img src="@item.ImagePath" class="card-img-top" alt="@item.Title">
-            <div class="card-body">
-                <p class="card-text">@item.Title</p>
-            </div>
-        </div>
-    }
+						<div class="d-flex flex-column mt-3">
+							@if (item.XPath != null)
+							{
+								<a href="@item.XPath" target="_blank" rel="noreferrer" class="mb-2">
+									<img src="./pub/logos/x.svg" alt="X" width="20" height="20" />
+								</a>
+							}
+							@if (item.GithubPath != null)
+							{
+								<a href="@item.GithubPath" target="_blank" rel="noreferrer" class="mb-2">
+									<img src="./pub/logos/github.svg" alt="X" width="20" height="20" />
+								</a>
+							}
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+						@if (item.DetailPath != null)
+						{
+							<a class="btn btn-primary" href="@item.DetailPath" role="button" target="_blank" rel="noreferrer">詳しく見る</a>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="card" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#@item.Id">
+			<img src="@item.ImagePath" class="card-img-top" alt="@item.Title">
+			<div class="card-body">
+				<p class="card-text">@item.Title</p>
+			</div>
+		</div>
+	}
 
 
 </div>
 
 @code {
-    List<portfolioItem> portfolioItems = new List<portfolioItem>
+	List<portfolioItem> portfolioItems = new List<portfolioItem>
 	{
 		new portfolioItem
 		{
 			Id = "illustrace",
 			Title = "イラストレース",
-			Description = "農工祭で展示するためのゲームとしてMCCのメンバーで作ったゲームです．",
+			Description = (MarkupString)"<p>農工祭で展示するためのゲームとしてMCCのメンバーで作ったゲームです．<br>自分の紙に書いたイラストがテクスチャとして貼られたオブジェクトで遊ぶレースゲームです.</br>Unityを使って作成し, 通信には Mirror を使いました.</br>学祭では数百人の大人から子供まで遊んでいただけました.</p>",
 			ImagePath = "./pub/portfolio/illustrace/1.webp",
-            DetailPath = "https://tuatmcc.com/news/2022-11-13-nokosai/",
-            XPath = "https://x.com/TUATMCC/status/1661668112931106816"
-        },
-        new portfolioItem
-        {
-            Id = "avoidgame",
-            Title = "AvoidGame",
-            Description = "農工祭で展示するためのゲームとしてMCCのメンバーで作ったゲームです．",
-            ImagePath = "./pub/portfolio/avoidgame/1.webp",
-            DetailPath = "https://tuatmcc.com/news/2023-11-10-nokosai/",
-            XPath = "https://x.com/TUATMCC/status/1722620350977220726",
-            GithubPath = "https://github.com/tuatmcc/AvoidGame"
-        },
-        new portfolioItem
-        {
-            Id = "beabachelor",
-            Title = "Be A Bachelor",
-            Description = "農工祭で展示するためのゲームとしてMCCのメンバーで作ったゲームです．",
-            ImagePath = "./pub/portfolio/beabachelor/1.webp",
-            XPath = "https://x.com/TUATMCC/status/1791041039433941067",
-            GithubPath = "https://github.com/tuatmcc/BeABachelor"
-        },
+			DetailPath = "https://tuatmcc.com/news/2022-11-13-nokosai/",
+			XPath = "https://x.com/TUATMCC/status/1661668112931106816"
+		},
+		new portfolioItem
+		{
+			Id = "avoidgame",
+			Title = "AvoidGame",
+			Description = (MarkupString)"農工祭で展示するためのゲームとしてMCCのメンバーで作ったゲームです．<br>モーションキャプチャーで前からやってくる障害物を避けたり, スコアを回収するゲームです.<br>Unityでゲームを作成し, モーションキャプチャーには MediaPipe を使い, Web カメラからの情報で骨格推定を行いました. <br>学祭では数百人の大人から子供まで遊んでいただけました.",
+			ImagePath = "./pub/portfolio/avoidgame/1.webp",
+			DetailPath = "https://tuatmcc.com/news/2023-11-10-nokosai/",
+			XPath = "https://x.com/TUATMCC/status/1722620350977220726",
+			GithubPath = "https://github.com/tuatmcc/AvoidGame"
+		},
+		new portfolioItem
+		{
+			Id = "beabachelor",
+			Title = "Be A Bachelor",
+			Description = (MarkupString)"農工祭で展示するためのゲームとしてMCCのメンバーで作ったゲームです．<br>アケコンでキャラクターを操作して時間内で単位(スコア)を回収し切るか, 対戦バトルで相手より多くの単位を回収できるかを競うゲームです.<br>通信対戦のためのシステムをTCPClientを使ってフルスクラッチで作成しました.",
+			ImagePath = "./pub/portfolio/beabachelor/1.webp",
+			XPath = "https://x.com/TUATMCC/status/1791041039433941067",
+			GithubPath = "https://github.com/tuatmcc/BeABachelor"
+		},
 	};
 
-    class portfolioItem
-    {
-        public string Id { get; set; }
-        public string Label => Id + "Label";
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string ImagePath { get; set; }
-        public string? DetailPath { get; set; }
+	class portfolioItem
+	{
+		public string Id { get; set; }
+		public string Label => Id + "Label";
+		public string Title { get; set; }
+		public MarkupString Description { get; set; }
+		public string ImagePath { get; set; }
+		public string? DetailPath { get; set; }
 		public string? XPath { get; set; }
 		public string? GithubPath { get; set; }
-    }
+	}
 }
