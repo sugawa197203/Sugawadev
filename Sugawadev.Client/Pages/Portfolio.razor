@@ -4,6 +4,26 @@
 <PageTitle>Portfolio</PageTitle>
 
 <h1>ポートフォリオ</h1>
+
+<div class="sugawatimeline container mt-5 mb-5">
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			<h4>略歴</h4>
+			<ul class="timeline">
+				@foreach (var item in timeLineItems)
+				{
+					<li>
+						<h5>@item.Title</h5>
+						<a>@item.Date.ToString("yyyy-MM-dd")</a>
+						@((MarkupString)item.Description)
+					</li>
+				}
+			</ul>
+		</div>
+	</div>
+</div>
+
+
 <div class="sakuhin">
 	<h2>過去に作ってきたものたち</h2>
 
@@ -58,6 +78,52 @@
 </div>
 
 @code {
+	List<TimeLine> timeLineItems = new List<TimeLine>
+	{
+		new TimeLine
+		{
+			Id = "entrydaigaku",
+			Title = "農工大に入学",
+			Date = new DateTime(2021, 4, 1),
+			Description = (MarkupString)"<p>東京農工大学工学部知能情報システム工学科に入学しました.</p>"
+		},
+		new TimeLine
+		{
+			Id = "cgengineer",
+			Title = "CGエンジニア検定 エキスパート合格",
+			Date = new DateTime(2023, 8, 2),
+			Description = (MarkupString)"<p>CGエンジニア検定のエキスパートに合格しました.</p>"
+		},
+		new TimeLine
+		{
+			Id = "apgoukaku",
+			Title = "応用情報技術者試験合格",
+			Date = new DateTime(2023, 12, 21),
+			Description = (MarkupString)"<p>応用情報技術者試験にに合格しました.</p>"
+		},
+		new TimeLine
+		{
+			Id = "detascience",
+			Title = "農工大の「数理・データサイエンス・AI教育プログラム(応用基礎)」修了",
+			Date = new DateTime(2024, 3, 28),
+			Description = (MarkupString)"<p>農工大の「数理・データサイエンス・AI教育プログラム(応用基礎)」を修了しました.</p>"
+		},
+		new TimeLine
+		{
+			Id = "graduation",
+			Title = "農工大卒業",
+			Date = new DateTime(2025, 3, 31),
+			Description = (MarkupString)"<p>東京農工大学を卒業しました.</p>"
+		},
+		new TimeLine
+		{
+			Id = "entrymaster",
+			Title = "農工大大学院入学",
+			Date = new DateTime(2025, 4, 1),
+			Description = (MarkupString)"<p>東京農工大学大学院に入学しました.</p>"
+		},
+	};
+
 	List<portfolioItem> portfolioItems = new List<portfolioItem>
 	{
 		new portfolioItem
@@ -90,15 +156,30 @@
 		},
 	};
 
+	class TimeLine
+	{
+		public string Id { get; set; }
+		public DateTime Date { get; set; }
+		public string Label => Id + "Label";
+		public string Title { get; set; }
+		public MarkupString Description { get; set; }
+	}
+
 	class portfolioItem
 	{
 		public string Id { get; set; }
 		public string Label => Id + "Label";
 		public string Title { get; set; }
+		public DateTime Date { get; set; }
 		public MarkupString Description { get; set; }
 		public string ImagePath { get; set; }
 		public string? DetailPath { get; set; }
 		public string? XPath { get; set; }
 		public string? GithubPath { get; set; }
+	}
+
+	protected override void OnInitialized()
+	{
+		timeLineItems = timeLineItems.OrderByDescending(x => x.Date).ToList();
 	}
 }
