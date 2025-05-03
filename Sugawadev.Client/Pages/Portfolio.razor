@@ -24,57 +24,57 @@
 </div>
 
 
-<div class="sakuhin">
+<div class="sakuhin container mt-5">
 	<h2>過去に作ってきたものたち</h2>
 
-	@foreach (var item in portfolioItems)
-	{
-		<div class="modal fade" id="@item.Id" tabindex="-1" aria-labelledby="@item.Label" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="@item.Label">@item.Title</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<img src="@item.ImagePath" class="modal-img d-block mx-auto" alt="@item.Title">
-						@((MarkupString)item.Description)
+	<div class="d-flex flex-wrap justify-content-center gap-3">
+		@foreach (var item in portfolioItems)
+		{
+			<div class="modal fade m-5" id="@item.Id" tabindex="-1" aria-labelledby="@item.Label" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="@item.Label">@item.Title</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<img src="@item.ImagePath" class="modal-img d-block mx-auto" alt="@item.Title">
+							@((MarkupString)item.Description)
 
-						<div class="d-flex flex-column mt-3">
-							@if (item.XPath != null)
+							<div class="d-flex flex-column mt-3">
+								@if (item.XPath != null)
+								{
+									<a href="@item.XPath" target="_blank" rel="noreferrer" class="mb-2">
+										<img src="./pub/logos/x.svg" alt="X" width="20" height="20" />
+									</a>
+								}
+								@if (item.GithubPath != null)
+								{
+									<a href="@item.GithubPath" target="_blank" rel="noreferrer" class="mb-2">
+										<img src="./pub/logos/github.svg" alt="X" width="20" height="20" />
+									</a>
+								}
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+							@if (item.DetailPath != null)
 							{
-								<a href="@item.XPath" target="_blank" rel="noreferrer" class="mb-2">
-									<img src="./pub/logos/x.svg" alt="X" width="20" height="20" />
-								</a>
-							}
-							@if (item.GithubPath != null)
-							{
-								<a href="@item.GithubPath" target="_blank" rel="noreferrer" class="mb-2">
-									<img src="./pub/logos/github.svg" alt="X" width="20" height="20" />
-								</a>
+								<a class="btn btn-primary" href="@item.DetailPath" role="button" target="_blank" rel="noreferrer">詳しく見る</a>
 							}
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-						@if (item.DetailPath != null)
-						{
-							<a class="btn btn-primary" href="@item.DetailPath" role="button" target="_blank" rel="noreferrer">詳しく見る</a>
-						}
-					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="card" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#@item.Id">
-			<img src="@item.ImagePath" class="card-img-top" alt="@item.Title">
-			<div class="card-body">
-				<p class="card-text">@item.Title</p>
+			<div class="card m-1 pt-1" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#@item.Id">
+				<img src="@item.ImagePath" class="card-img-top" alt="@item.Title">
+				<div class="card-body">
+					<p class="card-text">@item.Title</p>
+				</div>
 			</div>
-		</div>
-	}
-
-
+		}
+	</div>
 </div>
 
 @code {
@@ -133,7 +133,8 @@
 			Description = (MarkupString)"<p>農工祭で展示するためのゲームとしてMCCのメンバーで作ったゲームです．<br>自分の紙に書いたイラストがテクスチャとして貼られたオブジェクトで遊ぶレースゲームです.</br>Unityを使って作成し, 通信には Mirror を使いました.</br>学祭では数百人の大人から子供まで遊んでいただけました.</p>",
 			ImagePath = "./pub/portfolio/illustrace/1.webp",
 			DetailPath = "https://tuatmcc.com/news/2022-11-13-nokosai/",
-			XPath = "https://x.com/TUATMCC/status/1661668112931106816"
+			XPath = "https://x.com/TUATMCC/status/1661668112931106816",
+			Date = new DateTime(2022, 8, 5),
 		},
 		new portfolioItem
 		{
@@ -143,7 +144,8 @@
 			ImagePath = "./pub/portfolio/avoidgame/1.webp",
 			DetailPath = "https://tuatmcc.com/news/2023-11-10-nokosai/",
 			XPath = "https://x.com/TUATMCC/status/1722620350977220726",
-			GithubPath = "https://github.com/tuatmcc/AvoidGame"
+			GithubPath = "https://github.com/tuatmcc/AvoidGame",
+			Date = new DateTime(2023, 9, 22),
 		},
 		new portfolioItem
 		{
@@ -152,7 +154,8 @@
 			Description = (MarkupString)"農工祭で展示するためのゲームとしてMCCのメンバーで作ったゲームです．<br>アケコンでキャラクターを操作して時間内で単位(スコア)を回収し切るか, 対戦バトルで相手より多くの単位を回収できるかを競うゲームです.<br>通信対戦のためのシステムをTCPClientを使ってフルスクラッチで作成しました.",
 			ImagePath = "./pub/portfolio/beabachelor/1.webp",
 			XPath = "https://x.com/TUATMCC/status/1791041039433941067",
-			GithubPath = "https://github.com/tuatmcc/BeABachelor"
+			GithubPath = "https://github.com/tuatmcc/BeABachelor",
+			Date = new DateTime(2024, 3, 14),
 		},
 	};
 
@@ -181,5 +184,6 @@
 	protected override void OnInitialized()
 	{
 		timeLineItems = timeLineItems.OrderByDescending(x => x.Date).ToList();
+		portfolioItems = portfolioItems.OrderByDescending(x => x.Date).ToList();
 	}
 }
