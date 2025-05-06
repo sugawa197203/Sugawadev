@@ -1,0 +1,7 @@
+﻿.nav_head{
+	background-color: darkcyan;
+}
+
+a, a:hover, a:visited {
+	color: inherit;
+}
