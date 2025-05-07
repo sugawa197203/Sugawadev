@@ -1,7 +1,38 @@
 ﻿.nav_head{
 	background-color: darkcyan;
+	padding: 16px;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	position: fixed;
+	z-index: 2;
 }
 
-a, a:hover, a:visited {
+.nav_content, nav_content:hover, nav_content:visited {
+	top: 6px;
+	border: none;
 	color: inherit;
+	padding: 3px;
+	color: white;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.nav_content_l{
+	position: fixed;
+	top: 16px;
+	left: 16px;
+}
+
+.hambuger{
+	position: fixed;
+	top: 6px;
+	right: 0px;
+	background-color: transparent;
+	border: none;
+
+}
+
+.hidehambuger {
+	display: none;
 }
