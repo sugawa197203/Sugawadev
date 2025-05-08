@@ -35,6 +35,23 @@
 						<a>@item.Date.ToString("yyyy-MM-dd")</a>
 						@((MarkupString)item.Description)
 					</li>
+					@if (item.XPath != null || item.OtherPath != null)
+					{
+						<div class="rirekilink">
+							@if (item.XPath != null)
+							{
+								<a href="@item.XPath" target="_blank" rel="noreferrer" class="mb-2">
+									<img src="./pub/logos/x.svg" alt="X" width="20" height="20" />
+								</a>
+							}
+							@if (item.OtherPath != null)
+							{
+								<a href="@item.OtherPath" target="_blank" rel="noreferrer" class="mb-2">
+									<img src="./pub/ui/link.svg" alt="X" width="20" height="20" />
+								</a>
+							}
+						</div>
+					}
 				}
 			</ul>
 		</div>
@@ -48,7 +65,7 @@
 	<div class="d-flex flex-wrap justify-content-center gap-3">
 		@foreach (var item in portfolioItems)
 		{
-			<div class="modal fade m-5" id="@item.Id" tabindex="-1" aria-labelledby="@item.Label" aria-hidden="true">
+			<div class="modal fade p-1" id="@item.Id" tabindex="-1" aria-labelledby="@item.Label" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -85,7 +102,7 @@
 				</div>
 			</div>
 
-			<div class="card m-1 pt-1 cp" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#@item.Id">
+			<div class="card m-1 pt-1 cp" data-bs-toggle="modal" data-bs-target="#@item.Id">
 				<img src="@item.ImagePath" class="card-img-top" alt="@item.Title">
 				<div class="card-body">
 					<p class="card-text">@item.Title</p>
@@ -295,7 +312,7 @@
 			Title = "技育展 2024 決勝進出",
 			Date = new DateTime(2024, 11, 10),
 			Description = (MarkupString)"<p>Who is? を応募したところ，技育展2024の決勝まで進出しました．</p>",
-			XPath = "https://x.com/TUATMCC/status/1839240014619881708"
+			XPath = "https://x.com/TUATMCC/status/1846150667951567017"
 		},
 		new EventTimeLine
 		{
