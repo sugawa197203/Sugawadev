@@ -46,3 +46,8 @@ ul.red > li:before {
 .rirekilink {
     padding-left: 20px;
 }
+
+.card-aspect {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
